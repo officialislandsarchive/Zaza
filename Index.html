@@ -3,46 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Preview</title>
+    <title>Link Previewer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Link Preview</h1>
+        <h1>Link Previewer</h1>
         <div class="input-group">
             <input type="text" id="urlInput" placeholder="Paste the link here">
-            <button onclick="fetchDetails()">Fetch Details</button>
+            <button onclick="addLink()">Add Link</button>
         </div>
-        <div id="itemDetails" class="item-details"></div>
+        <div id="linkList" class="link-list"></div>
     </div>
 
     <script>
-        async function fetchDetails() {
-            const url = document.getElementById('urlInput').value;
+        document.addEventListener('DOMContentLoaded', (event) => {
+            loadLinks();
+        });
 
-            // Simulate fetching details
-            const details = await getDetailsFromUrl(url);
-            displayDetails(details);
-        }
-
-        async function getDetailsFromUrl(url) {
-            // Placeholder for actual fetching logic
-            // Here you can add your logic to fetch details from the URL
-            // For now, we return mock data
-            return {
+        function addLink() {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+            if (!url) return;
+            
+            const details = {
+                url: url,
                 title: "Sample Item",
                 image: "https://via.placeholder.com/150",
                 description: "This is a sample item description."
             };
+
+            saveLink(details);
+            displayLink(details);
+            urlInput.value = '';
         }
 
-        function displayDetails(details) {
-            const itemDetails = document.getElementById('itemDetails');
-            itemDetails.innerHTML = `
+        function saveLink(details) {
+            let links = JSON.parse(localStorage.getItem('links')) || [];
+            links.push(details);
+            localStorage.setItem('links', JSON.stringify(links));
+        }
+
+        function loadLinks() {
+            let links = JSON.parse(localStorage.getItem('links')) || [];
+            links.forEach(details => displayLink(details));
+        }
+
+        function displayLink(details) {
+            const linkList = document.getElementById('linkList');
+            const linkItem = document.createElement('div');
+            linkItem.className = 'link-item';
+            linkItem.innerHTML = `
                 <h2>${details.title}</h2>
                 <img src="${details.image}" alt="${details.title}">
                 <p>${details.description}</p>
+                <a href="${details.url}" target="_blank">Visit</a>
             `;
+            linkList.appendChild(linkItem);
         }
     </script>
 </body>
