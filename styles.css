@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('https://images.unsplash.com/photo-1611080625782-c08edbb6a0b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDg5NTB8MHwxfGFsbHwxfHx8fHx8fHwxNjEwNzEyNjMy&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+    background: url('https://images.unsplash.com/photo-1516750105099-4a874a6a689d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDg5NTB8MHwxfGFsbHwxfHx8fHx8fHwxNjEwNzEyNjMy&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     display: flex;
@@ -14,13 +14,27 @@ body {
 }
 
 .container {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     max-width: 700px;
     width: 100%;
     text-align: center;
+    position: relative;
+}
+
+.container:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    background: url('https://i.imgur.com/lL3wG4T.png') repeat;
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.2;
 }
 
 h1 {
@@ -34,27 +48,37 @@ h1 {
 .input-group {
     display: flex;
     margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .input-group input {
     flex: 1;
     padding: 10px;
-    border: 2px solid #76c7c0;
-    border-radius: 5px 0 0 5px;
+    border: none;
     font-size: 16px;
     background-color: #fff;
     color: #2c3e50;
+    border-radius: 0;
 }
 
 .input-group button {
     padding: 10px 20px;
-    border: 2px solid #76c7c0;
+    border: none;
     background: #1abc9c;
     color: #fff;
-    border-radius: 0 5px 5px 0;
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+}
+
+.input-group button i {
+    margin-left: 10px;
 }
 
 .input-group button:hover {
@@ -79,11 +103,13 @@ h1 {
 
 .link-item .link-image {
     margin-right: 20px;
+    flex-shrink: 0;
 }
 
 .link-item .link-image img {
     max-width: 100px;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .link-item .link-details {
